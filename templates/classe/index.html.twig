@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Hello ClasseController!
 {% endblock %}
 
@@ -20,12 +19,34 @@
 	<div class="example-wrapper">
 		<h1>Hello
 			{{ controller_name }}! ✅</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Libelle</th>
+					<th scope="col">Filiere</th>
+					<th scope="col">Niveau</th>
 
-		{% for classe in classes %}
-			<h3>
-				{{classe.libelle}}-{{classe.filiere}}-{{classe.niveau}}
-			</h3>
-		{% endfor %}
-		
+				</tr>
+			</thead>
+			{% for classe in classes %}
+				<tr>
+					<td>
+						{{classe.libelle}}
+					</td>
+					<td>
+						{{classe.filiere}}
+					</td>
+					<td>
+						{{classe.niveau}}
+					</td>
+				</tr>
+
+			{% endfor %}
+		</table>
+
+	</div>
+	<div class="d-flex justify-content-center">
+		{% do classes.setPageRange(10) %}
+		{{knp_pagination_render(classes,'pagination.html.twig')}}
 	</div>
 {% endblock %}
