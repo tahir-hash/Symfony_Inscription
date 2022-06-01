@@ -16,7 +16,7 @@ class Module
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255,unique:true)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $libelle;
 
     #[ORM\ManyToMany(targetEntity: Professeur::class, inversedBy: 'modules')]

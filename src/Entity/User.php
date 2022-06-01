@@ -14,13 +14,13 @@ class User extends Personne implements UserInterface, PasswordAuthenticatedUserI
 {
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $login;
+    protected $login;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [];
+    protected $roles = [];
 
     #[ORM\Column(type: 'string')]
-    private $password;
+    protected $password;
 
     public function getLogin(): ?string
     {
@@ -51,7 +51,7 @@ class User extends Personne implements UserInterface, PasswordAuthenticatedUserI
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles = ['ROLE_USER'];
 
         return array_unique($roles);
     }

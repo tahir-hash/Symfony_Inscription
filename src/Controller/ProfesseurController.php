@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Professeur;
 use App\Repository\ProfesseurRepository;
+use Doctrine\Common\Collections\Expr\Value;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Annotation\Route; 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProfesseurController extends AbstractController
