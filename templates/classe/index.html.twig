@@ -25,7 +25,7 @@
 					<th scope="col">Libelle</th>
 					<th scope="col">Filiere</th>
 					<th scope="col">Niveau</th>
-
+					<th scope="col">ACTIONS</th>
 				</tr>
 			</thead>
 			{% for classe in classes %}
@@ -38,6 +38,18 @@
 					</td>
 					<td>
 						{{classe.niveau}}
+					</td>
+					<td>
+						<a href="{{path('app_classe_update')}}" class="badge">
+							<button type="submit" class="btn btn-warning m-3 test">
+								UPDATE
+							</button>
+						</a>
+						<a href="{{path('app_classe_delete',{"id":classe.id})}}" onclick="return confirm('test)" class="badge">
+							<button type="submit" class="btn btn-danger m-3 test">
+								DELETE
+							</button>
+						</a>
 					</td>
 				</tr>
 
