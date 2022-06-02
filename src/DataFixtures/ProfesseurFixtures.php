@@ -20,7 +20,7 @@ class ProfesseurFixtures extends Fixture
             $prof->setGrade('grade' . $i);
             $prof->setSexe($sexe[$rand]);
             for ($j = 0; $j < 2; $j++) {
-                $ref = rand(0, 19);
+                $ref = rand(0, 9);
                 $prof->addClass($this->getReference('classe' . $ref));
             }
             foreach ($modules as $module) {

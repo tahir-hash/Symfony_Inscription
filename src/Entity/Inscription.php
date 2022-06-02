@@ -18,20 +18,20 @@ class Inscription
     #[ORM\Column(type: 'string', length: 255)]
     private $etat;
 
-    #[ORM\ManyToOne(targetEntity: AC::class, inversedBy: 'inscriptions')]
+    #[ORM\ManyToOne(targetEntity: AC::class, inversedBy: 'inscriptions',cascade:['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private $AC;
 
-    #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'inscriptions')]
+    #[ORM\ManyToOne(targetEntity: Classe::class, inversedBy: 'inscriptions',cascade:['persist'])]
     private $classe;
 
-    #[ORM\ManyToOne(targetEntity: AnneeScolaire::class, inversedBy: 'inscriptions')]
+    #[ORM\ManyToOne(targetEntity: AnneeScolaire::class, inversedBy: 'inscriptions',cascade:['persist'])]
     private $anneeScolaire;
 
-    #[ORM\ManyToOne(targetEntity: Etudiant::class, inversedBy: 'inscriptions')]
+    #[ORM\ManyToOne(targetEntity: Etudiant::class, inversedBy: 'inscriptions',cascade:['persist'])]
     private $etudiant;
 
-    #[ORM\OneToMany(mappedBy: 'inscription', targetEntity: Demande::class)]
+    #[ORM\OneToMany(mappedBy: 'inscription', targetEntity: Demande::class,cascade:['persist'])]
     private $demandes;
 
     public function __construct()

@@ -30,6 +30,10 @@ class Classe
     #[ORM\OneToMany(mappedBy: 'classe', targetEntity: Inscription::class)]
     private $inscriptions;
 
+
+
+  
+
     public function __construct()
     {
         $this->professeurs = new ArrayCollection();
@@ -130,4 +134,5 @@ class Classe
 
         return $this;
     }
+
 }

@@ -12,7 +12,7 @@ class ClasseFixtures extends Fixture
     {     
         $filières=['Dev Web','Dev Mobile','Dev Web Mobile'] ; 
         $niveaux=['L1','L2','L3'] ; 
-        for ($i=0; $i <20 ; $i++) { 
+        for ($i=0; $i <10 ; $i++) { 
             # code... 
             $classe= New Classe; 
             $rand=rand(0,2); 
