@@ -17,8 +17,6 @@
 	</style>
 
 	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -40,7 +38,7 @@
 						{{classe.niveau}}
 					</td>
 					<td>
-						<a href="{{path('app_classe_update')}}" class="badge">
+						<a href="{{path('app_classe_update',{"id":classe.id})}}" class="badge">
 							<button type="submit" class="btn btn-warning m-3 test">
 								UPDATE
 							</button>
