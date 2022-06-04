@@ -17,15 +17,19 @@ class ModuleController extends AbstractController
     Request $request): Response
     {
         $modules=new Module;
-        $data=$repo->findAll();
+        $datas=$repo->findAll();
+        $data=$repo->findBy([],['id'=>'DESC']);
         $modules=$paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
-            1
+            5
         );
+        $cpt=$request->query->getInt('page', 1)*5-4;
+
         return $this->render('module/index.html.twig', [
             'controller_name' => 'ModuleController',
-            'modules'=>$modules
+            'modules'=>$modules,
+            'cpt'=>$cpt
         ]);
     }
 }

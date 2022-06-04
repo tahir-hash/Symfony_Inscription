@@ -1,59 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
-      <!-- Container wrapper -->
-      <div class="container-fluid">
-        <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-        </button>
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Navbar brand -->
-          <a class="navbar-brand mt-2 mt-lg-0" href="#">
-            <img src="image/logo.png" height="100" alt="MBAYE PRO Logo" loading="lazy" />
-          </a>
-          <!-- Left links -->
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="{{path('app_classe')}}">Lister classe</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="{{path('app_module')}}">Lister Module</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="{{path('app_professeur')}}">lister prof</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="">lister etudiant inscrits</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="">Lister Les demandes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="">Inscrire un etudiant</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="">lister etudiant inscrits</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="">Lister Les demandes</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-light h5" href="">Lister mes demandes</a>
-              </li>
+<nav
+	class="navbar navbar-expand-lg navbar-light bg-secondary">
+	<!-- Container wrapper -->
+	<div
+		class="container-fluid">
+		<!-- Toggle button -->
+		<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+		</button>
+		<!-- Collapsible wrapper -->
+		<div
+			class="collapse navbar-collapse" id="navbarSupportedContent">
+			<!-- Navbar brand -->
+			<a class="navbar-brand mt-2 mt-lg-0" href="#">
+				<img src="/image/logo.png" height="100" alt="MBAYE PRO Logo" loading="lazy"/>
+			</a>
+			<!-- Left links -->
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link text-light h5" href="{{path('app_classe')}}">Lister classe</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link text-light h5" href="{{path('app_module')}}">Lister Module</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-light h5" href="{{path('app_professeur')}}">lister prof</a>
+				</li>
+			</ul>
+			<!-- Left links -->
+		</div>
+		<!-- Collapsible wrapper -->
+		<div class="col">
+			<h1 class="card-title text-center">{{"2021-2022"}}</h1>
+		</div>
+		<!-- Right elements -->
+		<div class="d-flex align-items-center">
+			<button type="submit" class="btn btn-danger m-3">
+				<a class="badge" href="{{path('app_logout')}}">
+					LOG OUT</a>
+			</button>
 
-          </ul>
-          <!-- Left links -->
-        </div>
-        <!-- Collapsible wrapper -->
-        <div class="col">
-         <h1 class="card-title text-center">{{"2021-2022"}}</h1>
-        </div>
-        <!-- Right elements -->
-        <div class="d-flex align-items-center">
-          <button type="submit" class="btn btn-danger m-3">
-            <a class="badge" href="{{path('app_logout')}}"> LOG OUT</a>
-          </button>
-
-        </div>
-    </nav>
-  <!-- END NAVBAR-->
+		</div>
+	</nav>
+	<!-- END NAVBAR-->

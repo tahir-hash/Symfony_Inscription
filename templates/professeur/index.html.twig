@@ -4,32 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
-
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
+	<div class="container mt-5">
+		<h1 class="card-title">LISTE DES PROFS</h1>
+		<button type="submit" class="btn btn-primary m-3">
+			<a class="badge" href="{{path('app_add_prof')}}">AJOUTER PROFESSEUR</a>
+		</button>
 		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th scope="col">#</th>
 					<th scope="col">Nom complet</th>
 					<th scope="col">Sexe</th>
 					<th scope="col">Grade</th>
+					<th scope="col">Action</th>
 				</tr>
 			</thead>
+			
 			{% for prof in profs %}
 				<tr>
+					<td>
+						{{cpt}}
+					</td>
 					<td>
 						{{prof.nomComplet}}
 					</td>
@@ -39,14 +34,20 @@
 					<td>
 						{{prof.grade}}
 					</td>
+					<td>
+						<button type="submit" class="btn btn-primary m-3">
+							<a class="badge" href="#">AFFECTER CLASSE</a>
+						</button>
+					</td>
 				</tr>
+				{% set cpt = cpt + 1 %}
 			{% endfor %}
 		</table>
-
+		<div class="d-flex flex-end">
+			{% do profs.setPageRange(10) %}
+			{{knp_pagination_render(profs,'pagination.html.twig')}}
+		</div>
 
 	</div>
-	<div class="d-flex justify-content-center">
-		{% do profs.setPageRange(10) %}
-		{{knp_pagination_render(profs,'pagination.html.twig')}}
-	</div>
+
 {% endblock %}

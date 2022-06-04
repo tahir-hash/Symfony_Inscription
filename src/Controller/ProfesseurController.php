@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Professeur;
+use App\Form\ProfFormType;
 use App\Repository\ProfesseurRepository;
 use Doctrine\Common\Collections\Expr\Value;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,15 +19,38 @@ class ProfesseurController extends AbstractController
     Request $request): Response
     {
         $profs= new Professeur;
-        $data=$repo->findAll();
+        $datas=$repo->findAll();
+        $data=$repo->findBy([],['id'=>'DESC']);
         $profs=$paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
-            2
+            5
         );
+        $cpt=$request->query->getInt('page', 1)*5-4;
+        //dd($cpt);
         return $this->render('professeur/index.html.twig', [
             'controller_name' => 'ProfesseurController',
-            'profs'=>$profs
+            'profs'=>$profs,
+            'cpt'=>$cpt
         ]);
+    }
+
+    #[Route('/add-prof', name: 'app_add_prof')]
+    public function add(
+        Request $request,
+       ProfesseurRepository $repo,
+    ): Response
+    {
+            $prof=new Professeur;
+            $form = $this->createForm(ProfFormType::class,$prof);
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $repo->add($prof,true);
+                return $this->redirectToRoute('app_professeur');
+            }
+            return $this->render('professeur/create.html.twig', [
+                'form'=>$form->createView(),
+            ]);
     }
 }

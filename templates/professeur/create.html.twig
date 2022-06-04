@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Hello ClasseController!
+{% block title %}Hello ProfesseurController!
 {% endblock %}
 
 {% block body %}
@@ -14,31 +14,27 @@
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-									 {{ form_row(form.libelle) }}
+									 {{ form_row(form.nomComplet) }}
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-									 {{ form_row(form.filiere) }}
+									 {{ form_row(form.sexe) }}
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-									 {{ form_row(form.niveau)}}
+									 {{ form_row(form.grade)}}
 									</div>
 								</div>
 							</div>
 							<div class="mt-4 pt-2">
 								<button type="submit"  name="submit" class="btn btn-primary btn-lg">
-									{% if editMode %}
-										ADD
-									{% else %}
-										Modifier
-									{% endif %}
+									ADD
 								</button>
 								
 							</div>

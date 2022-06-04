@@ -28,16 +28,20 @@ class ClasseController extends AbstractController
         Request $request
     ): Response
     {
-        $data=$repo->findAll();
+       
+        $datas=$repo->findAll();
+        $data=$repo->findBy([],['id'=>'DESC']);
         $ecole=$paginator->paginate(
             $data,
             $request->query->getInt('page', 1),
             5
         );
+        $cpt=$request->query->getInt('page', 1)*5-4;
         return $this->render('classe/index.html.twig', [
             'controller_name' => 'ClasseController',
             'classes'=>$ecole,
-            'repo'=>$repo
+            'repo'=>$repo,
+            'cpt'=>$cpt
         ]);
     }
 
