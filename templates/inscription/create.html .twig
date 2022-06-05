@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Hello ProfesseurController!
+{% block title %}Inscrire Un Etudiant
 {% endblock %}
 
 {% block body %}
@@ -14,39 +14,31 @@
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-									 {{ form_row(form.nomComplet) }}
-									</div>
-								</div>
-								<div class="col-md-6 mb-4">
-                                    <h5>Affecter des classes</h5>
-									<div class="form-outline">
-									 {{ form_row(form.classes) }}
+									 {{ form_row(form.libelle) }}
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-									 {{ form_row(form.sexe) }}
+									 {{ form_row(form.filiere) }}
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-									 {{ form_row(form.grade)}}
-									</div>
-								</div>
-								<div class="col-md-6 mb-4">
-                                    <h5>Affecter des modules</h5>
-									<div class="form-outline">
-									 {{ form_row(form.modules) }}
+									 {{ form_row(form.niveau)}}
 									</div>
 								</div>
 							</div>
 							<div class="mt-4 pt-2">
 								<button type="submit"  name="submit" class="btn btn-primary btn-lg">
-									ADD
+									{% if editMode %}
+										ADD
+									{% else %}
+										Modifier
+									{% endif %}
 								</button>
 								
 							</div>

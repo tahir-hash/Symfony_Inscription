@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\InscriptionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class InscriptionController extends AbstractController
 {
@@ -15,4 +17,13 @@ class InscriptionController extends AbstractController
             'controller_name' => 'InscriptionController',
         ]);
     }
+
+    #[Route('/add-inscription', name: 'add_inscription')]
+    public function add(InscriptionRepository $repo,SessionInterface $session): Response
+    {
+        return $this->render('inscription/index.html.twig', [
+            'controller_name' => 'InscriptionController',
+        ]);
+    }
 }
+

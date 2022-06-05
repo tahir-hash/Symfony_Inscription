@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Professeur;
-use App\Form\ProfFormType;
+use App\Form\ProfesseurFormType;
+use App\Repository\ClasseRepository;
+use App\Repository\ModuleRepository;
 use App\Repository\ProfesseurRepository;
 use Doctrine\Common\Collections\Expr\Value;
 use Knp\Component\Pager\PaginatorInterface;
@@ -39,10 +41,12 @@ class ProfesseurController extends AbstractController
     public function add(
         Request $request,
        ProfesseurRepository $repo,
+       ClasseRepository $classes,
+       ModuleRepository $modules
     ): Response
     {
             $prof=new Professeur;
-            $form = $this->createForm(ProfFormType::class,$prof);
+            $form = $this->createForm(ProfesseurFormType::class,$prof);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
@@ -51,6 +55,8 @@ class ProfesseurController extends AbstractController
             }
             return $this->render('professeur/create.html.twig', [
                 'form'=>$form->createView(),
+                "modules"=>$modules->findAll(),
+                "classes"=>$classes->findAll()
             ]);
     }
 }

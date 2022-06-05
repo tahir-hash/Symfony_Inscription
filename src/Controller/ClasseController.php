@@ -27,9 +27,8 @@ class ClasseController extends AbstractController
         PaginatorInterface $paginator,
         Request $request
     ): Response
-    {
-       
-        $datas=$repo->findAll();
+    {       
+        //$datas=$repo->findAll();
         $data=$repo->findBy([],['id'=>'DESC']);
         $ecole=$paginator->paginate(
             $data,

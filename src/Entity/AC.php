@@ -17,6 +17,7 @@ class AC extends User
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
+        $this->roles=['ROLE_AC'];
     }
 
     /**

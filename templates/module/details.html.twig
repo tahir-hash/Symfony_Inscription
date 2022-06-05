@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello Mod!
+{% endblock %}
+
+{% block body %}
+	<section class="gradient-custom">
+		<div class="container py-5 h-100">
+			<div class="row justify-content-center align-items-center h-100">
+				<div class="col-12 col-lg-9 col-xl-7">
+					<div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+						<div class="card-body p-4 p-md-5">
+							<h3 class="mb-4 pb-2 pb-md-0 mb-md-5">les Professeurs du module:{{modules.libelle}}</h3>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">Nom complet</th>
+										<th scope="col">Sexe</th>
+										<th scope="col">Grade</th>
+									</tr>
+								</thead>
+
+								{% for prof in modules.professeurs %}
+									<tr>
+										<td>
+											{{prof.nomComplet}}
+										</td>
+										<td>
+											{{prof.sexe}}
+										</td>
+										<td>
+											{{prof.grade}}
+										</td>
+									</tr>
+								{% endfor %}
+							</table>
+							<div class="d-flex flex-end">
+								<a class="btn btn-success m-3" href="{{path('app_module')}}">Retour Sur la liste</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

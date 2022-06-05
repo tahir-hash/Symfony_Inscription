@@ -17,6 +17,7 @@ class RP extends User
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
+        $this->roles=['ROLE_RP'];
     }
 
     /**

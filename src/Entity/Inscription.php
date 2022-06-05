@@ -37,6 +37,7 @@ class Inscription
     public function __construct()
     {
         $this->demandes = new ArrayCollection();
+        $this->etat="EN COURS";
     }
 
     public function getId(): ?int
