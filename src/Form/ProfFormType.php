@@ -2,16 +2,18 @@
 
 namespace App\Form;
 
+
+use App\Entity\Classe;
+use App\Entity\Module;
 use App\Entity\Professeur;
-use App\Repository\ClasseRepository;
-use App\Repository\ModuleRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class ProfesseurFormType extends AbstractType
+class ProfFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -36,30 +38,26 @@ class ProfesseurFormType extends AbstractType
                     'class' => "form-control form-control-lg",
                 ]
             ])
-            ->add('grade', TextType::class, [
-                'attr' => [
-                    'class' => "form-control form-control-lg",
-                ]
-            ])
-            ->add('modules',ChoiceType::class, [
+            ->add('modules', EntityType::class, [
                 'attr' => [
                     'class' => "select selectpicker",
-                    'multiple' => 'multiple',
-                    'data-live-search'=>true,
-                    'name'=>"modules[]"
-                ], 'choices' => ['test' => 'test'],
-                'label'=>' '
+                    'data-live-search' => true,
+                ], 'class' => Module::class,
+                'choice_label' => 'libelle',
+                'label' => ' ',
+                'multiple' => true,
+
             ])
-            ->add('classes', ChoiceType::class, [
+            ->add('classes', EntityType::class, [
+                'choice_label' => 'libelle',
                 'attr' => [
                     'class' => "select selectpicker",
-                    'multiple' => 'multiple',
-                    'data-live-search'=>true,
-                    'name'=>"classes[]"
-                ], 'choices' =>['test' => 'test'],
+                    'data-live-search' => true,
+                ], 'class' => Classe::class,
+                'multiple' => true,
                 'label'=>' '
+
             ])
-            ->getForm()
         ;
     }
 
@@ -67,8 +65,6 @@ class ProfesseurFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Professeur::class,
-            'module'=>ModuleRepository::class,
-            'classe'=>ClasseRepository::class
         ]);
     }
 }

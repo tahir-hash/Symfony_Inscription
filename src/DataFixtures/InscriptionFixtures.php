@@ -33,6 +33,8 @@ class InscriptionFixtures extends Fixture
             $ins->setClasse($this->getReference('classe' .$rand2));
             $ins->setAnneeScolaire($this->getReference('annee'));
             $ins->setAC($this->getReference('ac'));
+
+            
             $manager->persist($ins);
         }
 
