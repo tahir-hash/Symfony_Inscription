@@ -40,8 +40,7 @@ class ProfesseurController extends AbstractController
     #[Route('/add-prof', name: 'app_add_prof')]
     public function add(
         Request $request,
-       ProfesseurRepository $repo,
-       EntityManagerInterface $manager
+       ProfesseurRepository $repo
     ): Response
     {
             $prof=new Professeur;
@@ -53,7 +52,6 @@ class ProfesseurController extends AbstractController
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-               
                 $repo->add($prof,true);
                 return $this->redirectToRoute('app_professeur');
             }

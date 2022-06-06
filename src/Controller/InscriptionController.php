@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etudiant;
 use App\Entity\Inscription;
 use App\Form\InscriptionType;
+use App\Repository\ClasseRepository;
 use App\Repository\EtudiantRepository;
 use App\Repository\InscriptionRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -62,11 +63,37 @@ class InscriptionController extends AbstractController
                 $name=strtolower($name[0]);
                 $etud->setLogin($name.$id.'@proacedemy.com');
                 $repo->add($inscription,true);
-                return $this->redirectToRoute('app_professeur');
+                return $this->redirectToRoute('app_inscription');
             }
         return $this->render('inscription/create.html.twig', [
             'form'=>$form->createView()
         ]);
     }
+
+    #[Route('/reinscrire/{id}', name: 'reinscrire')]
+    public function reinscrire(
+        Request $request,
+        InscriptionRepository $repo,
+        Inscription $inscription)
+        {
+                $data=$repo->find($inscription->getId());
+               // dd($data);
+                $user = $this->getUser();
+                $form = $this->createForm(InscriptionType::class,$inscription);
+                $form->handleRequest($request);
+                $inscription=new Inscription;
+                $inscription->setAC($user);
+                $inscription->setEtudiant($data->getEtudiant());
+                if($form->isSubmitted() && $form->isValid())
+                {
+                    $repo->add($inscription,true);
+                    return $this->redirectToRoute('app_inscription');
+                }
+            return $this->render('inscription/create.html.twig', [
+                'form'=>$form->createView(),
+                'editMode'=>$inscription->getId()!==null,
+                'data'=>$data
+            ]);
+        }
 }
 
