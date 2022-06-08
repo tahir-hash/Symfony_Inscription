@@ -8,6 +8,7 @@ use App\Entity\Inscription;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InscriptionType extends AbstractType
@@ -21,12 +22,10 @@ class InscriptionType extends AbstractType
                 'attr'=>[
                     'class'=>'select form-control-lg'
                 ],
-                'label'=>" "
+                'label'=>" ", 
+                'required'=>false,
+                
             ])
-            /* ->add('anneeScolaire') */
-           /*  ->add('etudiant',CollectionType::class,[
-                'entry_type' => EtudiantType::class
-            ])  */
             ->add('etudiant',EtudiantType::class)
         ;
     }

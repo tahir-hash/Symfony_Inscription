@@ -44,7 +44,12 @@ class Inscription
     {
         return $this->id;
     }
+    public function setId($id): self
+    {
+        $this->id = $id;
 
+        return $this;
+    }
     public function getEtat(): ?string
     {
         return $this->etat;

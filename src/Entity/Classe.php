@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ClasseRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert; 
+use App\Repository\ClasseRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 #[ORM\Entity(repositoryClass: ClasseRepository::class)]
+#[UniqueEntity(fields:'libelle',message: 'le libelle doit etre unique!')]
+
 class Classe
 {
     #[ORM\Id]
@@ -15,24 +19,44 @@ class Classe
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255,unique:true)]
+    #[Assert\NotBlank(message: 'le libelle ne doit pas etre vide')]
     private $libelle;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Choisir une filiere')]
     private $filiere;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Choisir un niveau')]
     private $niveau;
 
-    #[ORM\ManyToMany(targetEntity: Professeur::class, inversedBy: 'classes')]
-    private $professeurs;
 
     #[ORM\OneToMany(mappedBy: 'classe', targetEntity: Inscription::class)]
     private $inscriptions;
 
+    public static $niveaux = [
+        '--Choisir un niveau---'=>'',
+        "L1" => 'L1', "L2" => 'L2', "L3" => 'L3',
+        "M1" => 'M1', "M2" => 'M2', "DOCTORAT" => 'DOCTORAT'
+    ];
 
+    public static $filieres = [
+        '--Choisir une filiere---'=>'',
+        "INFORMATIQUE DE GESTION" => 'INFORMATIQUE DE GESTION',
+        "DEV MOBILE" => 'DEV MOBILE', "DEV WEB" => 'DEV WEB',
+        "DEV WEB MOBILE" => 'DEV WEB MOBILE',
+        "MANAGEMENT" => 'MANAGEMENT',
+        "DROIT DES AFFAIRES" => 'DROIT DES AFFAIRES'
+    ];
 
-  
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $test;
+
+    #[ORM\ManyToMany(targetEntity: Professeur::class, mappedBy: 'classes')]
+    private $professeurs;
+
+    
 
     public function __construct()
     {
@@ -135,4 +159,15 @@ class Classe
         return $this;
     }
 
+    public function getTest(): ?string
+    {
+        return $this->test;
+    }
+
+    public function setTest(?string $test): self
+    {
+        $this->test = $test;
+
+        return $this;
+    }
 }

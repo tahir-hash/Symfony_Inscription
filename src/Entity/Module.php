@@ -16,11 +16,13 @@ class Module
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255,unique:true)]
     private $libelle;
 
-    #[ORM\ManyToMany(targetEntity: Professeur::class, inversedBy: 'modules')]
+    #[ORM\ManyToMany(targetEntity: Professeur::class, mappedBy: 'modules')]
     private $professeurs;
+
+   
 
     public function __construct()
     {

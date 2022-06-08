@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DemandeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 #[ORM\Entity(repositoryClass: DemandeRepository::class)]
 class Demande
@@ -14,6 +15,7 @@ class Demande
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Le Libelle ne doit pas etre vide')]
     private $libelle;
 
     #[ORM\Column(type: 'string', length: 255)]

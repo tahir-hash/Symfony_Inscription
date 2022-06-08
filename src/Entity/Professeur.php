@@ -7,20 +7,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProfesseurRepository;
+use Symfony\Component\Validator\Constraints as Assert; 
 
 
 #[ORM\Entity(repositoryClass: ProfesseurRepository::class)]
 class Professeur extends Personne
 {
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Le grade ne doit pas etre vide')]
     private $grade;
 
-    #[ORM\ManyToMany(targetEntity: Module::class, mappedBy: 'professeurs',cascade:['persist'])]
-    private $modules;
-
-    #[ORM\ManyToMany(targetEntity: Classe::class, mappedBy: 'professeurs',cascade:['persist'])]
+    #[ORM\ManyToMany(targetEntity: Classe::class, inversedBy: 'professeurs',cascade:['persist'])]
     private $classes;
 
+    #[ORM\ManyToMany(targetEntity: Module::class, inversedBy: 'professeurs',cascade:['persist'])]
+    private $modules;
+
+    
     public function __construct()
     {
         $this->modules = new ArrayCollection();
@@ -91,5 +94,10 @@ class Professeur extends Personne
         }
 
         return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->nomComplet;
     }
 }

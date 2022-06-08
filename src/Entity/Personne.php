@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PersonneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert; 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name: "discr", type: "string")]
@@ -16,9 +17,11 @@ class Personne
     protected $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Le nom complet ne doit pas etre vide')]
     protected $nomComplet;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message:'Le sexe ne doit pas etre vide')]
     protected $sexe;
 
     public function getId(): ?int

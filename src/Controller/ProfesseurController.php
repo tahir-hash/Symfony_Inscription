@@ -6,8 +6,10 @@ use App\Entity\Classe;
 use App\Entity\Module;
 use App\Entity\Professeur;
 use App\Form\ProfFormType;
+use App\Repository\ClasseRepository;
 use App\Repository\ProfesseurRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,19 +42,18 @@ class ProfesseurController extends AbstractController
     #[Route('/add-prof', name: 'app_add_prof')]
     public function add(
         Request $request,
-       ProfesseurRepository $repo
+       ProfesseurRepository $repo,
+       EntityManagerInterface $manager
     ): Response
     {
             $prof=new Professeur;
-            /* $classe=new Classe;
-            $module=new Module; 
-            $prof->addClass($classe);
-            $prof->addModule($module); */
             $form = $this->createForm(ProfFormType::class,$prof);
-            $form->handleRequest($request);
+             $form->handleRequest($request);
+
             if($form->isSubmitted() && $form->isValid())
             {
-                $repo->add($prof,true);
+                $repo->add($form->getData(),true);
+                $this->addFlash('success','Enregistrement du professeur reussi');
                 return $this->redirectToRoute('app_professeur');
             }
             return $this->render('professeur/create.html.twig', [

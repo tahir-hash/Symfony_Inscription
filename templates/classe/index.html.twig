@@ -3,6 +3,7 @@
 {% endblock %}
 
 {% block body %}
+
 	<div class="container mt-5">
 		<h1 class="card-title">LISTE DES CLASSES</h1>
 		<button type="submit" class="btn btn-primary m-3">
@@ -38,8 +39,8 @@
 								UPDATE
 							</button>
 						</a>
-						<a href="{{path('app_classe_delete',{"id":classe.id})}}" onclick="return confirm('test)" class="badge">
-							<button type="submit" class="btn btn-danger m-3 test">
+						<a href="{{path('app_classe_delete',{"id":classe.id})}}"  class="badge">
+							<button onclick=" return confirm('Voulez-vous supprimer la classe':classe.libelle)" type="submit" class="btn btn-danger m-3 test">
 								DELETE
 							</button>
 						</a>

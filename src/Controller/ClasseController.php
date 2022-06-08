@@ -61,6 +61,7 @@ class ClasseController extends AbstractController
             if($form->isSubmitted() && $form->isValid())
             {
                 $repo->add($classe,true);
+                $this->addFlash('success','Classe ajoutée avec succès');
                 return $this->redirectToRoute('app_classe');
             }
             return $this->render('classe/create.html.twig', [

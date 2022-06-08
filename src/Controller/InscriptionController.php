@@ -54,7 +54,7 @@ class InscriptionController extends AbstractController
             $etud->setPassword($hashedPassword);
             $etud->setMatricule("MAT--".$id);
             $inscription->setEtudiant($etud);
-            $inscription->setAC($user);
+            //$inscription->setAC($user);
             $form = $this->createForm(InscriptionType::class,$inscription);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
@@ -63,10 +63,12 @@ class InscriptionController extends AbstractController
                 $name=strtolower($name[0]);
                 $etud->setLogin($name.$id.'@proacedemy.com');
                 $repo->add($inscription,true);
+                $this->addFlash('success','Inscription reussie');
                 return $this->redirectToRoute('app_inscription');
             }
         return $this->render('inscription/create.html.twig', [
-            'form'=>$form->createView()
+            'form'=>$form->createView(),
+            'editMode'=>$inscription->getId()!==null,
         ]);
     }
 
@@ -76,23 +78,23 @@ class InscriptionController extends AbstractController
         InscriptionRepository $repo,
         Inscription $inscription)
         {
-                $data=$repo->find($inscription->getId());
-               // dd($data);
-                $user = $this->getUser();
-                $form = $this->createForm(InscriptionType::class,$inscription);
+               $inscription->setId(null);
+                $inscription->setEtat('TERMINER');
+                $reinscription=new Inscription;
+                $reinscription->setAC($inscription->getAc());
+                $reinscription->setEtudiant($inscription->getEtudiant());
+                $reinscription->setClasse($inscription->getClasse());
+                $form = $this->createForm(InscriptionType::class,$reinscription);
                 $form->handleRequest($request);
-                $inscription=new Inscription;
-                $inscription->setAC($user);
-                $inscription->setEtudiant($data->getEtudiant());
                 if($form->isSubmitted() && $form->isValid())
                 {
-                    $repo->add($inscription,true);
+                    $repo->add($reinscription,true);
+                    $this->addFlash('success','Reinscription reussie');
                     return $this->redirectToRoute('app_inscription');
                 }
             return $this->render('inscription/create.html.twig', [
                 'form'=>$form->createView(),
-                'editMode'=>$inscription->getId()!==null,
-                'data'=>$data
+                'editMode'=>$reinscription->getId()==null,
             ]);
         }
 }

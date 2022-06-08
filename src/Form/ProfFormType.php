@@ -9,9 +9,11 @@ use App\Entity\Professeur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ProfFormType extends AbstractType
 {
@@ -21,7 +23,9 @@ class ProfFormType extends AbstractType
             ->add('nomComplet', TextType::class, [
                 'attr' => [
                     'class' => "form-control form-control-lg",
-                ]
+                   
+                ], 'required'=>false,
+                
             ])
             ->add('sexe', ChoiceType::class, [
                 'attr' => [
@@ -30,33 +34,37 @@ class ProfFormType extends AbstractType
                 'choices' => [
                     'Masculin' => 'Masculin',
                     'Feminin' => 'Feminin'
-                ]
-
+                ], 'required'=>false,
             ])
             ->add('grade', TextType::class, [
                 'attr' => [
                     'class' => "form-control form-control-lg",
-                ]
+                ], 'required'=>false,
+                
             ])
             ->add('modules', EntityType::class, [
                 'attr' => [
                     'class' => "select selectpicker",
                     'data-live-search' => true,
-                ], 'class' => Module::class,
+                    'placeholder'=>"Choisir un Module"
+                ],
+                 'class' => Module::class,
                 'choice_label' => 'libelle',
                 'label' => ' ',
-                'multiple' => true,
-
+                'multiple' => true, 
+                'required'=>false,               
             ])
             ->add('classes', EntityType::class, [
                 'choice_label' => 'libelle',
                 'attr' => [
                     'class' => "select selectpicker",
                     'data-live-search' => true,
+                    'placeholder'=>"Choisir une classe"
+
                 ], 'class' => Classe::class,
                 'multiple' => true,
-                'label'=>' '
-
+                'label'=>' ', 
+                'required'=>false,  
             ])
         ;
     }
