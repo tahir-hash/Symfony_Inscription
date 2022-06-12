@@ -44,7 +44,6 @@ class ClasseController extends AbstractController
             'cpt'=>$cpt
         ]);
     }
-
     #[Route('/add-classe', name: 'app_add_classe')]
     #[Route('/update-classe/{id}', name: 'app_classe_update')]
     public function add(
