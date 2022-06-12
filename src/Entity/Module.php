@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\ModuleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Unique;
+use App\Repository\ModuleRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ModuleRepository::class)]
+#[UniqueEntity(fields:'libelle',message: 'le libelle doit etre unique!')]
+
 class Module
 {
     #[ORM\Id]
@@ -17,6 +20,7 @@ class Module
     private $id;
 
     #[ORM\Column(type: 'string', length: 255,unique:true)]
+    #[Assert\NotBlank(message: 'le libelle ne doit pas etre vide')]
     private $libelle;
 
     #[ORM\ManyToMany(targetEntity: Professeur::class, mappedBy: 'modules')]

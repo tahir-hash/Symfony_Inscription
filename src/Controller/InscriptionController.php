@@ -54,7 +54,7 @@ class InscriptionController extends AbstractController
             $etud->setPassword($hashedPassword);
             $etud->setMatricule("MAT--".$id);
             $inscription->setEtudiant($etud);
-            //$inscription->setAC($user);
+            $inscription->setAC($user);
             $form = $this->createForm(InscriptionType::class,$inscription);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())

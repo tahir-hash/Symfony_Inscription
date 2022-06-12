@@ -27,6 +27,10 @@ class Demande
 
     #[ORM\ManyToOne(targetEntity: RP::class, inversedBy: 'demandes')]
     private $rp;
+    public function __construct()
+    {
+        $this->etat="EN COURS";
+    }
 
     public function getId(): ?int
     {

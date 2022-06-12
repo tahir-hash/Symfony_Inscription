@@ -21,7 +21,6 @@ class ModuleController extends AbstractController
     Request $request): Response
     {
         $modules=new Module;
-        $datas=$repo->findAll();
         $data=$repo->findBy([],['id'=>'DESC']);
         $modules=$paginator->paginate(
             $data,

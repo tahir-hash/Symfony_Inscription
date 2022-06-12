@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DemandeController!
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<h1 class="card-title">LISTE DES DEMANDES</h1>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Libelle</th>
+					<th scope="col">Nom Complet</th>
+					<th scope="col">Matricule</th>
+					<th scope="col">Etat demande</th>
+					<th scope="col">ACTIONS</th>
+				</tr>
+			</thead>
+
+			{% for demande in demandes %}
+				<tr>
+					<td>
+						{{cpt}}
+					</td>
+					<td>
+						{{demande.libelle}}
+					</td>
+					<td>
+						{{demande.inscription.etudiant.nomComplet}}
+					</td>
+					<td>
+						{{demande.inscription.etudiant.matricule}}
+					</td>
+					<td>
+						{{demande.etat}}
+					</td>
+					<td>
+						{# <a href="" class="badge">
+							<button type="submit" class="btn btn-success m-3 test">
+								VALIDER
+							</button>
+						</a>
+						<a href=""  class="badge">
+							<button  type="submit" class="btn btn-danger m-3 test">
+								REFUSER
+							</button>
+						</a> #}
+						<form action="{{path('etat_demande',{"id":demande.id})}}" class="btn" method="POST">
+                  <input type="hidden" name="action" value="valider">
+                  <input type="hidden" name="id_ins" value="{{demande.inscription.id}}">
+                  <input type="submit" class="btn btn-success test" value="VALIDER">
+              </form>
+              <form action="{{path('etat_demande',{"id":demande.id})}}" class="btn" method="POST">
+                <input type="hidden" name="action" value="refus">
+                <input type="submit" class="btn btn-danger test" value="REFUSER">
+              </form>
+					</td>
+				</tr>
+				{% set cpt = cpt + 1 %}
+
+			{% endfor %}
+		</table>
+		<div class="d-flex flex-end">
+			{% do demandes.setPageRange(10) %}
+			{{knp_pagination_render(demandes,'pagination.html.twig')}}
+		</div>
+	</div>
+
+{% endblock %}
