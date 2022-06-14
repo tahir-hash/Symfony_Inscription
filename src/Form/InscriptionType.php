@@ -24,6 +24,7 @@ class InscriptionType extends AbstractType
                 ],
                 'label'=>" ", 
                 'required'=>false,
+                'constraints' => [new NotBlank()]
                 
             ])
             ->add('etudiant',EtudiantType::class)

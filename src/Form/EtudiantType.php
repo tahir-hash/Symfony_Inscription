@@ -19,7 +19,7 @@ class EtudiantType extends AbstractType
                 'attr' => [
                     'class' => "form-control form-control-lg",
                 ], 'required'=>false,
-                //'mapped'=>true
+                'constraints' => [new NotBlank()]               
             ])
             ->add('sexe', ChoiceType::class, [
                 'attr' => [
@@ -29,13 +29,13 @@ class EtudiantType extends AbstractType
                     'Masculin' => 'Masculin',
                     'Feminin' => 'Feminin'
                 ], 'required'=>false,
-                //'mapped'=>true
+                'constraints' => [new NotBlank()]               
             ])
             ->add('adresse',TextType::class, [
                 'attr' => [
                     'class' => "form-control form-control-lg",
                 ], 'required'=>false,
-                //'mapped'=>true
+                'constraints' => [new NotBlank()]
             ])
             ;
     }

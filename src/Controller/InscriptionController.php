@@ -100,7 +100,7 @@ class InscriptionController extends AbstractController
             return $this->render('inscription/create.html.twig', [
                 'form'=>$form->createView(),
                 'editMode'=>$reinscription->getId()==null,
+                'matricule'=>$reinscription->getEtudiant()->getMatricule()
             ]);
         }
 }
-

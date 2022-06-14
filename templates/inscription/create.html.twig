@@ -11,30 +11,37 @@
 					<div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
 						<div class="card-body p-4 p-md-5">
 							<h3 class="mb-4 pb-2 pb-md-0 mb-md-5">
-									{% if editMode %}
+									{% if editMode  %}
 										Reinscrire un etudiant
 									{% else %}
 									Inscrire un etudiant
 									{% endif %}
 							</h3>
+							<h5>
+							{% if editMode  %}
+										Matricule: {{matricule}}
+									{% endif %}
+							</h5>
 							{{form_start(form)}}
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-										{{form_row(form.etudiant.nomComplet,)}}
+										{# {{form_row(form.etudiant.nomComplet,)}} #}
+										{{form_row(form.etudiant.nomComplet,(editMode  ? {'attr': {'readonly': 'yes'} }:{}))}}
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
-										{{ form_row(form.etudiant.adresse) }}
+										{{ form_row(form.etudiant.adresse,(editMode  ? {'attr': {'readonly': 'yes'} }:{})) }}
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-6 mb-4">
 									<div class="form-outline">
+
 										{{ form_row(form.etudiant.sexe) }}
 									</div>
 								</div>
@@ -50,7 +57,7 @@
 
 							<div class="mt-4 pt-2">
 								<button type="submit" name="submit" class="btn btn-primary btn-lg">
-									{% if editMode %}
+									{% if editMode  %}
 										Reinscrire
 									{% else %}
 									Inscrire

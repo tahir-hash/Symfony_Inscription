@@ -6,12 +6,12 @@
 
 	<div class="container mt-5">
 		<h1 class="card-title">LISTE DES CLASSES</h1>
-		<button type="submit" class="btn btn-primary m-3">
-			{% if is_granted('ROLE_RP') %}
+		{% if is_granted('ROLE_RP') %}
+			<button type="submit" class="btn btn-primary m-3">
 				<a class="badge" href="{{path('app_add_classe')}}">AJOUTER UNE ClASSE</a>
-			{% endif %}
+			</button>
+		{% endif %}
 
-		</button>
 		<table class="table table-striped">
 			<thead>
 				<tr>
