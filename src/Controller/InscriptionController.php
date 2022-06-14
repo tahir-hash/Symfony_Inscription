@@ -43,6 +43,7 @@ class InscriptionController extends AbstractController
     InscriptionRepository $repo,
     EtudiantRepository $reposit,
     AnneeScolaireRepository $repository,
+    SessionInterface $session,
     UserPasswordHasherInterface $passwordHasher): Response
     {
             $id=$reposit->findBy([],['id'=>'DESC'])[0]->getId()+1;
@@ -57,7 +58,7 @@ class InscriptionController extends AbstractController
             $etud->setMatricule("MAT--".$id);
             $inscription->setEtudiant($etud);
             $inscription->setAC($user);
-            $annee=$repository->find(16);
+            $annee=$repository->find($session->get('annee'));
             $inscription->setAnneeScolaire($annee);
             $form = $this->createForm(InscriptionType::class,$inscription);
             $form->handleRequest($request);

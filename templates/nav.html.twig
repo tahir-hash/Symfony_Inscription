@@ -55,7 +55,8 @@
 		</div>
 		<!-- Collapsible wrapper -->
 		<div class="col">
-			<h1 class="card-title text-center">{{"2021-2022"}}</h1>
+		{# {{app.session.get('annee').libelle}} #}
+			<h1 class="card-title text-center">{{app.session.get('annee').annee}}</h1>
 		</div>
 		<!-- Right elements -->
 		<div class="d-flex align-items-center">
