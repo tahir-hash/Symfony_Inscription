@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,9 +49,12 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
+        $user = $token->getUser();
         // For example:
-         return new RedirectResponse($this->urlGenerator->generate('app_classe'));
+        if (in_array("ROLE_ETUDIANT", $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('app_demande'));
+        }
+        return new RedirectResponse($this->urlGenerator->generate('app_classe'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 

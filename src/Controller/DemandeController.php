@@ -75,7 +75,6 @@ class DemandeController extends AbstractController
             $inscription=$demande->getInscription();
             $inscription->setEtat('ANNULER');
             $demande->setLibelle($demande->getLibelle());
-            //dd($inscription);
             $user = $this->getUser();
             $demande->setEtat('VALIDER');
             $demande->setRp($user);

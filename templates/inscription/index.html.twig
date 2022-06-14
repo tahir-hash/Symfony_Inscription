@@ -4,8 +4,10 @@
 
 {% block body %}
 	<div class="container mt-5">
-		<h1 class="card-title">LISTE DES inscriptionS</h1>
-		<a class="btn btn-primary m-3" href="{{path('add_inscription')}}">Inscrire un etudiant</a>
+		<h1 class="card-title">LISTE DES INSCRIPTIONS</h1>
+		{% if is_granted('ROLE_AC') %}
+			<a class="btn btn-primary m-3" href="{{path('add_inscription')}}">Inscrire un etudiant</a>
+		{% endif %}
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -36,7 +38,10 @@
 						{{inscription.classe.libelle}}
 					</td>
 					<td>
-						<a class="btn btn-info m-3" href="{{path('reinscrire',{"id":inscription.id})}}">REINSCRIRE</a>
+						{% if is_granted('ROLE_AC') %}
+							<a class="btn btn-info m-3" href="{{path('reinscrire',{"id":inscription.id})}}">REINSCRIRE</a>
+						{% endif %}
+
 					</td>
 				</tr>
 				{% set cpt = cpt + 1 %}

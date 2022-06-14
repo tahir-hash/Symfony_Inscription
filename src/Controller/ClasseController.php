@@ -12,23 +12,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ClasseController extends AbstractController
 {
-    
-    public function __construct(private ManagerRegistry $doctrine)
-    {
-        
-    }
     #[Route('/classe', name: 'app_classe')]
+   // #[IsGranted('ROLE_RP', message: 'acces refuse')]
     public function index(
         ClasseRepository $repo, SessionInterface $session,
         PaginatorInterface $paginator,
         Request $request
     ): Response
-    {       
+    {
         //$datas=$repo->findAll();
         $data=$repo->findBy([],['id'=>'DESC']);
         $ecole=$paginator->paginate(

@@ -35,6 +35,9 @@
 				{% endif %}
 				{% if is_granted('ROLE_AC') %}
 				<li class="nav-item">
+						<a class="nav-link text-light h5" href="{{path('app_classe')}}">Lister classe</a>
+				</li>
+				<li class="nav-item">
 					<a class="nav-link text-light h5" href="{{path('app_inscription')}}">Liste des Etudiants</a>
 				</li>
 				<li class="nav-item">

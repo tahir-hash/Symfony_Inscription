@@ -7,7 +7,10 @@
 	<div class="container mt-5">
 		<h1 class="card-title">LISTE DES CLASSES</h1>
 		<button type="submit" class="btn btn-primary m-3">
-			<a class="badge" href="{{path('app_add_classe')}}">AJOUTER UNE ClASSE</a>
+			{% if is_granted('ROLE_RP') %}
+				<a class="badge" href="{{path('app_add_classe')}}">AJOUTER UNE ClASSE</a>
+			{% endif %}
+
 		</button>
 		<table class="table table-striped">
 			<thead>
@@ -34,16 +37,19 @@
 						{{classe.niveau}}
 					</td>
 					<td>
-						<a href="{{path('app_classe_update',{"id":classe.id})}}" class="badge">
-							<button type="submit" class="btn btn-warning m-3 test">
-								UPDATE
-							</button>
-						</a>
-						<a href="{{path('app_classe_delete',{"id":classe.id})}}"  class="badge">
-							<button onclick=" return confirm('Voulez-vous supprimer la classe':classe.libelle)" type="submit" class="btn btn-danger m-3 test">
-								DELETE
-							</button>
-						</a>
+						{% if is_granted('ROLE_RP') %}
+
+							<a href="{{path('app_classe_update',{"id":classe.id})}}" class="badge">
+								<button type="submit" class="btn btn-warning m-3 test">
+									UPDATE
+								</button>
+							</a>
+							<a href="{{path('app_classe_delete',{"id":classe.id})}}" class="badge">
+								<button onclick=" return confirm('Voulez-vous supprimer la classe':classe.libelle)" type="submit" class="btn btn-danger m-3 test">
+									DELETE
+								</button>
+							</a>
+						{% endif %}
 					</td>
 				</tr>
 				{% set cpt = cpt + 1 %}

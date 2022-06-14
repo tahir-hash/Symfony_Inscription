@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etudiant;
 use App\Entity\Inscription;
 use App\Form\InscriptionType;
+use App\Repository\AnneeScolaireRepository;
 use App\Repository\ClasseRepository;
 use App\Repository\EtudiantRepository;
 use App\Repository\InscriptionRepository;
@@ -41,6 +42,7 @@ class InscriptionController extends AbstractController
     Request $request,
     InscriptionRepository $repo,
     EtudiantRepository $reposit,
+    AnneeScolaireRepository $repository,
     UserPasswordHasherInterface $passwordHasher): Response
     {
             $id=$reposit->findBy([],['id'=>'DESC'])[0]->getId()+1;
@@ -55,10 +57,13 @@ class InscriptionController extends AbstractController
             $etud->setMatricule("MAT--".$id);
             $inscription->setEtudiant($etud);
             $inscription->setAC($user);
+            $annee=$repository->find(16);
+            $inscription->setAnneeScolaire($annee);
             $form = $this->createForm(InscriptionType::class,$inscription);
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
+               // dd($inscription);
                 $name=explode(' ',$inscription->getEtudiant()->getNomComplet());
                 $name=strtolower($name[0]);
                 $etud->setLogin($name.$id.'@proacedemy.com');
