@@ -9,6 +9,7 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 		<link rel="stylesheet" href="/bootstrap/bootstrap-select.min.css"> 
 		<link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" integrity="sha512-yVvxUQV0QESBt1SyZbNJMAwyKvFTLMyXSyBHDO4BG5t7k/Lw34tyqlSDlKIrIENIzCl+RVUNjmCPG+V/GMesRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
@@ -30,5 +31,10 @@
 		<script src="/bootstrap/jquery.min.js"></script>
 		<script src="/bootstrap/bootstrap.bundle.min.js"></script>
 		<script src="/bootstrap/bootstrap-select.min.js"></script>
+		<script src="/bootstrap/bootstrap-select.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+	$(".chosen").chosen({no_results_text: "Oops, rien n'a été trouvé!"});
+</script>
 	</body>
 </html>

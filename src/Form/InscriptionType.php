@@ -20,7 +20,7 @@ class InscriptionType extends AbstractType
                 'class' => Classe::class,
                 'choice_label' => 'libelle',
                 'attr'=>[
-                    'class'=>'select form-control-lg'
+                    'class'=>'form-control-lg chosen',
                 ],
                 'label'=>" ", 
                 'required'=>false,
