@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Classe;
 use App\Form\ClassFormType;
 use App\Repository\ClasseRepository;
+use App\Service\ServiceTest;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -26,6 +27,7 @@ class ClasseController extends AbstractController
         Request $request
     ): Response
     {
+       // dd($service->ok());
         //$datas=$repo->findAll();
         $data=$repo->findBy([],['id'=>'DESC']);
         $ecole=$paginator->paginate(

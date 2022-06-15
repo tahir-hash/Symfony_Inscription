@@ -9,6 +9,7 @@ use App\Repository\AnneeScolaireRepository;
 use App\Repository\ClasseRepository;
 use App\Repository\EtudiantRepository;
 use App\Repository\InscriptionRepository;
+use App\Service\ServiceTest;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,10 +42,11 @@ class InscriptionController extends AbstractController
     public function add(
     Request $request,
     InscriptionRepository $repo,
-    EtudiantRepository $reposit,
     AnneeScolaireRepository $repository,
     SessionInterface $session,
-    UserPasswordHasherInterface $passwordHasher): Response
+    EtudiantRepository $reposit,
+    UserPasswordHasherInterface $passwordHasher,
+    ServiceTest $service): Response
     {
             $id=$reposit->findBy([],['id'=>'DESC'])[0]->getId()+1;
             $user = $this->getUser();
@@ -64,10 +66,8 @@ class InscriptionController extends AbstractController
             $form->handleRequest($request);
             if($form->isSubmitted() && $form->isValid())
             {
-               // dd($inscription);
-                $name=explode(' ',$inscription->getEtudiant()->getNomComplet());
-                $name=strtolower($name[0]);
-                $etud->setLogin($name.$id.'@proacedemy.com');
+                $login=$service->loginEtud($id,$inscription->getEtudiant()->getNomComplet());
+                $etud->setLogin($login);
                 $repo->add($inscription,true);
                 $this->addFlash('success','Inscription reussie');
                 return $this->redirectToRoute('app_inscription');

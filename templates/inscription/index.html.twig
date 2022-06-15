@@ -16,7 +16,10 @@
 					<th scope="col">Nom complet</th>
 					<th scope="col">Sexe</th>
 					<th scope="col">Classe</th>
-					<th scope="col">Action</th>
+						{% if is_granted('ROLE_AC') %}
+						<th scope="col">Action</th>
+						{% endif %}
+
 				</tr>
 			</thead>
 
@@ -37,12 +40,13 @@
 					<td>
 						{{inscription.classe.libelle}}
 					</td>
+					{% if is_granted('ROLE_AC') %}
 					<td>
-						{% if is_granted('ROLE_AC') %}
+						
 							<a class="btn btn-info m-3" href="{{path('reinscrire',{"id":inscription.id})}}">REINSCRIRE</a>
-						{% endif %}
-
+					
 					</td>
+						{% endif %}
 				</tr>
 				{% set cpt = cpt + 1 %}
 			{% endfor %}
